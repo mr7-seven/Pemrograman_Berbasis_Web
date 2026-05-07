@@ -1,0 +1,11 @@
+    <div class="text-white d-flex align-items-center gap-3">
+        <span>
+            <?= $_SESSION['username']; ?>
+            (<?= $_SESSION['role']; ?>)
+        </span>
+
+        <a href="logout.php" class="btn btn-light btn-sm">
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+        </a>
+    </div>
