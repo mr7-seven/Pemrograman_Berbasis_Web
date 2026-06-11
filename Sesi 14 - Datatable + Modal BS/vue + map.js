@@ -94,6 +94,44 @@
                     }
 
                 },
+				
+				// tambahkan fungsi berikut:
+				                async showChart(parameter) {
+
+                    this.selectedParameter = parameter
+
+                    this.chartModal.show()
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                `get_plot.php?parameter=${parameter}`
+                            )
+
+                        const data =
+                            await response.json()
+
+                        Plotly.react(
+                            'plotContainer',
+                            [{
+                                x: data.map(item => item.waktu),
+                                y: data.map(item => item.nilai),
+                                mode: 'lines+markers',
+                                name: parameter
+                            }], {
+                                title: `Grafik ${parameter}`,
+                                responsive: true
+                            }
+                        )
+
+                    } catch (error) {
+
+                        console.error(error)
+
+                    }
+
+                }
 
                 // async toggleKontaktor(channel, value) {
 
