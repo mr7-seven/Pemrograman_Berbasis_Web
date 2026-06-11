@@ -24,7 +24,9 @@
                     loading: false,
                     map: null,
 
-                    modalMap: null
+                    modalMap: null,
+					selectedParameter: '',
+                    chartModal: null
 
                 }
 
@@ -96,7 +98,7 @@
                 },
 				
 				// tambahkan fungsi berikut:
-				                async showChart(parameter) {
+				    async showChart(parameter) {
 
                     this.selectedParameter = parameter
 
@@ -303,6 +305,36 @@
                     this.getMeterData()
 
                 }, 5000)
+				
+				                const plotModalElement =
+                    document.getElementById('plotModal')
+
+                this.chartModal =
+                    new bootstrap.Modal(
+                        plotModalElement
+                    )
+
+                plotModalElement.addEventListener(
+                    'shown.bs.modal',
+                    () => {
+
+                        Plotly.Plots.resize(
+                            document.getElementById(
+                                'plotContainer'
+                            )
+                        )
+
+                    }
+                )
+
+                plotModalElement.addEventListener(
+                    'hide.bs.modal',
+                    () => {
+
+                        document.activeElement?.blur()
+
+                    }
+                )
 
                 const modalElement =
                     document.getElementById('mapModal')
